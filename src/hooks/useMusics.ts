@@ -7,6 +7,12 @@ export interface Music {
   title: string;
   image: string;
   thumbnailsSmall:string;
+  "text-representation" : {
+    script : string;
+    language : string
+  };
+  quality:string;
+  status:string
 }
 interface FetchMusicsResponse {
   releases: Music[];
@@ -28,7 +34,7 @@ const useMusics = () => {
               ? {
                   ...prevMusic,
                   image: res.data.images[0].image,
-                  thumbnailsSmall:  res.data.images[0].thumbnails.small,
+                  thumbnailsSmall:  res.data.images[0].thumbnails["small"],
                 }
               : prevMusic
           )
@@ -40,7 +46,7 @@ const useMusics = () => {
   useEffect(() => {
     apiClient
       .get<FetchMusicsResponse>(
-        "/release?label=47e718e1-7ee4-460c-b1cc-1192a841c6e5&limit=6&offset=6"
+        "/release?label=47e718e1-7ee4-460c-b1cc-1192a841c6e5&limit=12&offset=12"
       )
       .then((res) => {
         setMusics(res.data.releases);
