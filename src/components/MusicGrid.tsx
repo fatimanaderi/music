@@ -1,16 +1,17 @@
-import { Text } from "@chakra-ui/react";
+import { SimpleGrid, Text } from "@chakra-ui/react";
 import useMusics from "../hooks/useMusics";
+import MusicCard from "./MusicCard";
 
 const MusicGrid = () => {
-  const {musics , error} = useMusics()
+  const {musics , error } = useMusics()
   return (
     <>
       {error && <Text>{error}</Text>}
-      <ul>
-        {musics.map((music) => (
-          <li key={music.id}>{music.name}</li>
+      <SimpleGrid columns={{sm:1 , md:2 , lg:3 , xl:4}} padding={10} spacing={10}>
+      {musics.map((music) =>(
+        <MusicCard key={music.id} music={music}/>
         ))}
-      </ul>
+      </SimpleGrid>
     </>
   );
 };
