@@ -21,6 +21,7 @@ interface FetchMusicsResponse {
 const useMusics = () => {
   const [musics, setMusics] = useState<Music[]>([]);
   const [error, setError] = useState("");
+  const [isLoading , setLoading] = useState(false)
 
   const getCoverImage = (id : string) => {
     axios
@@ -37,13 +38,17 @@ const useMusics = () => {
                   thumbnailsSmall:  res.data.images[0].thumbnails["small"],
                 }
               : prevMusic
-          )
-        );
+          ));
+        setLoading(false)
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err)
+        setLoading(false)
+      });
   };
 
   useEffect(() => {
+    setLoading(true)
     apiClient
       .get<FetchMusicsResponse>(
         "/release?label=47e718e1-7ee4-460c-b1cc-1192a841c6e5&limit=12&offset=12"
@@ -53,11 +58,13 @@ const useMusics = () => {
         res.data.releases.map((music) => {
           getCoverImage(music.id);
         });
+        
       })
       .catch((err) => {
         setError(err.message);
+        setLoading(false)
       });
   }, []);
-  return { musics, error };
+  return { musics, error ,isLoading};
 };
 export default useMusics;

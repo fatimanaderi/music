@@ -9,7 +9,7 @@ interface Props {
 }
 const MusicCard = ({ music }: Props) => {
   return (
-    <Card borderRadius={10} overflow="hidden">
+    <Card width={"300px"} borderRadius={10} overflow="hidden">
       <Image src={music.thumbnailsSmall} />
       <CardBody>
         <Heading fontSize={"xl"}>{music.title}</Heading>
