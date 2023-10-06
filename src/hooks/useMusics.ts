@@ -1,70 +1,66 @@
-import { useEffect, useState } from "react";
-import apiClient from "../services/api-client";
 import axios from "axios";
+import useData from "./useData";
+import { useEffect, useState } from "react";
+import loadingImage from "../assets/loadingImage.png"
 
 export interface Music {
   id: string;
   title: string;
-  image: string;
-  thumbnailsSmall:string;
-  "text-representation" : {
-    script : string;
-    language : string
-  };
-  quality:string;
-  status:string
+  thumbnailsSmall: string;
+  "primary-type": string;
+  "score": string;
+  "artist-credit":ArtistCredit[]
+  releases:Release[]
 }
-interface FetchMusicsResponse {
-  releases: Music[];
+interface ArtistCredit{
+    name:string
 }
-
+interface Release{
+  id:string
+}
 const useMusics = () => {
-  const [musics, setMusics] = useState<Music[]>([]);
-  const [error, setError] = useState("");
-  const [isLoading , setLoading] = useState(false)
+  const [imageLoading , setImageLoading] = useState<boolean[]>(Array(8).fill(true));
+  const {data, error,setData } = useData<Music>({
+    endpoint: "release-group",
+    limit: 8,
+    offset: 8,
+    query:"release",
+    listname: "release-groups",
+  });
+  
+  const setUrlCover =(url:string , id:string , index:number)=>{
+    setData((data) =>
+      data.map((preMusic) =>
+        preMusic.id === id
+          ? {
+              ...preMusic,
+              thumbnailsSmall: url,
+            }
+          : preMusic
+        )
+    );
+    setImageLoading((imageLoading)=>{
+      const newImageLoading = [...imageLoading];
+      newImageLoading[index] = false;
+      return newImageLoading;
+    })
+  }
 
-  const getCoverImage = (id : string) => {
+  const getCoverImage = (id: string , index:number) => {
     axios
-      .get("http://coverartarchive.org/release/" + id, {
+      .get("http://coverartarchive.org/release-group/" + id, {
         headers: { "Content-Type": "application/json" },
       })
       .then((res) => {
-        setMusics((musics) =>
-          musics.map((prevMusic) =>
-            prevMusic.id === id 
-              ? {
-                  ...prevMusic,
-                  image: res.data.images[0].image,
-                  thumbnailsSmall:  res.data.images[0].thumbnails["small"],
-                }
-              : prevMusic
-          ));
-        setLoading(false)
+        setUrlCover(res.data.images[0].thumbnails["small"] ,id , index)
       })
       .catch((err) => {
-        console.log(err)
-        setLoading(false)
+        setUrlCover(loadingImage ,id , index)
       });
   };
-
   useEffect(() => {
-    setLoading(true)
-    apiClient
-      .get<FetchMusicsResponse>(
-        "/release?label=47e718e1-7ee4-460c-b1cc-1192a841c6e5&limit=12&offset=12"
-      )
-      .then((res) => {
-        setMusics(res.data.releases);
-        res.data.releases.map((music) => {
-          getCoverImage(music.id);
-        });
-        
-      })
-      .catch((err) => {
-        setError(err.message);
-        setLoading(false)
-      });
-  }, []);
-  return { musics, error ,isLoading};
+    data.forEach((music , index) => getCoverImage(music.id , index))
+  },[JSON.stringify(data)]);
+  return {data , error , imageLoading }
 };
 export default useMusics;
