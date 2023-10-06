@@ -1,4 +1,4 @@
-import { SimpleGrid, Text } from "@chakra-ui/react";
+import { Center, SimpleGrid, Text } from "@chakra-ui/react";
 import MusicCard from "./MusicCard";
 import useMusics from "../hooks/useMusics";
 
@@ -13,7 +13,10 @@ const MusicGrid = () => {
         spacing={8}
       >
         {data.map((music,index) => (
-          <MusicCard key={music.id} music={music} imageStatus={imageLoading[index]}/>
+          <Center>
+            <MusicCard key={music.id} music={music} imageStatus={imageLoading[index]}/>
+          </Center>
+          
         ))}
       </SimpleGrid>
     </>

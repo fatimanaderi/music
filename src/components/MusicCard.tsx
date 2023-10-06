@@ -7,7 +7,7 @@ interface Props {
 }
 const MusicCard = ({ music, imageStatus }: Props) => {
   return (
-    <Card width={"250px"} borderRadius={10} overflow="hidden" mx={1}>
+    <Card marginX={1} width={"250px"} borderRadius={10} overflow="hidden" mx={1}>
       {imageStatus ? <Skeleton height={"250px"} />:<Image src={music.thumbnailsSmall} height={"250px"} />}
      
       <MusicCardBody

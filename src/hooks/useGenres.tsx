@@ -7,8 +7,8 @@ export interface Genre {
 const useGenres = () =>
   useData<Genre>({
     endpoint: "/genre/all",
-    limit: 12,
-    offset: 12,
+    limit: 17,
+    offset: 17,
     listname:"genres"
   });
 

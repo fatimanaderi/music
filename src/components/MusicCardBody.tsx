@@ -1,6 +1,6 @@
 import { CardBody, HStack, Heading } from "@chakra-ui/react";
 import MusicCardIcon from "./MusicCardIcon";
-import MusicCardLan from "./MusicCardLan";
+import MusicCardScore from "./MusicCardScore";
 import { IoMdMusicalNote } from "react-icons/io";
 import { AiFillStar } from "react-icons/ai";
 
@@ -19,7 +19,7 @@ const MusicCardBody = ({ title, name, type, lan }: Props) => {
           <MusicCardIcon nameIcon={IoMdMusicalNote} valueName={title} />
           <MusicCardIcon nameIcon={AiFillStar} valueName={type} />
         </HStack>
-        <MusicCardLan lan={lan} />
+        <MusicCardScore lan={lan} />
       </HStack>
     </CardBody>
   );

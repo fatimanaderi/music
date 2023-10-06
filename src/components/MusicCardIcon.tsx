@@ -9,7 +9,7 @@ const MusicCardIcon=({nameIcon,valueName} : Props)=>{
     return(
         <HStack>
             <Center>
-                <Icon mx={1} as={nameIcon} color={"gray.500"}/>
+                <Icon mx={1} as={nameIcon} color={"purple.500"}/>
                 {valueName}
             </Center>
         </HStack>
