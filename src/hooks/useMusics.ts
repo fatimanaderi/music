@@ -1,7 +1,7 @@
 import axios from "axios";
 import useData from "./useData";
 import { useEffect, useState } from "react";
-import loadingImage from "../assets/loadingImage.png";
+import loadingImage from "../assets/logo2.png";
 
 export interface Music {
   id: string;
