@@ -11,9 +11,9 @@ const GenraList = ({ onSelectedGenre,selectedGenre }: Props) => {
   if (error) return null;
   return (
     <List mx={1}>
-      {data?.map((genra) => (
+      {data.map((genra) => (
         <ListItem key={genra.id}>
-          <HStack my={4}>
+          <HStack my={3}>
             <Icon boxSize={"30px"} as={SiApplemusic} color={"purple.200"} />
             <Button
               onClick={() => onSelectedGenre(genra.name)}

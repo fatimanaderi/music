@@ -9,8 +9,8 @@ const MusicGrid = ({selectedGenre}:Props) => {
   if(error) return null
   return (
       <SimpleGrid
-        columns={{ sm: 1, md: 3, lg: 3, xl: 4 }}
-        padding={10}
+        columns={{ base :1 ,sm: 2, md: 3, lg: 3, xl: 4 }}
+        padding={5}
         spacing={4}
       >
         {data.map((music,index) => (

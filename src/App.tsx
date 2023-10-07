@@ -3,6 +3,7 @@ import NavBar from "./components/NavBar";
 import MusicGrid from "./components/MusicGrid";
 import GenraList from "./components/GenraList";
 import { useState } from "react";
+import MusicInstrumentSelector from "./components/MusicInstrumentSelector";
 
 function App() {
   const [selectedGenre , setSelectedGenre] = useState("")
@@ -10,7 +11,7 @@ function App() {
     <>
       <Grid
         templateAreas={{ base: `"nav" "main"`, lg: `"nav nav" "aside main"` }}
-        templateColumns={{ base: "1fr", lg: "250px" }}
+        templateColumns={{ base: "1fr", lg: "230px" }}
       >
         <GridItem area={"nav"}>
           <NavBar />
@@ -21,6 +22,7 @@ function App() {
           </GridItem>
         </Show>
         <GridItem  area={"main"}>
+          <MusicInstrumentSelector/>
           <MusicGrid selectedGenre={selectedGenre}/>
         </GridItem>
       </Grid>
