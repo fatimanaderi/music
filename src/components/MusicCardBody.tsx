@@ -1,25 +1,22 @@
 import { CardBody, HStack, Heading } from "@chakra-ui/react";
 import MusicCardIcon from "./MusicCardIcon";
 import MusicCardScore from "./MusicCardScore";
-import { IoMdMusicalNote } from "react-icons/io";
 import { AiFillStar } from "react-icons/ai";
 
 interface Props {
-  title: string;
   name: string;
   type: string;
-  lan: string;
+  score: string;
 }
-const MusicCardBody = ({ title, name, type, lan }: Props) => {
+const MusicCardBody = ({ name, type, score }: Props) => {
   return (
     <CardBody>
-      <Heading fontSize={"xl"}>{name}</Heading>
+      <Heading fontSize={"lg"}>{name}</Heading>
       <HStack justifyContent={"space-between"}>
         <HStack my={1}>
-          <MusicCardIcon nameIcon={IoMdMusicalNote} valueName={title} />
           <MusicCardIcon nameIcon={AiFillStar} valueName={type} />
         </HStack>
-        <MusicCardScore lan={lan} />
+        <MusicCardScore score={score} />
       </HStack>
     </CardBody>
   );

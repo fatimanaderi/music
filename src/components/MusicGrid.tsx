@@ -1,16 +1,17 @@
 import { Center, SimpleGrid } from "@chakra-ui/react";
 import MusicCard from "./MusicCard";
 import useMusics from "../hooks/useMusics";
-
-const MusicGrid = () => {
-  const { data, error ,imageLoading } = useMusics();
+interface Props{
+  selectedGenre:string
+}
+const MusicGrid = ({selectedGenre}:Props) => {
+  const { data, error ,imageLoading } = useMusics(selectedGenre);
   if(error) return null
   return (
-    <>
       <SimpleGrid
-        columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
+        columns={{ sm: 1, md: 3, lg: 3, xl: 4 }}
         padding={10}
-        spacing={8}
+        spacing={4}
       >
         {data.map((music,index) => (
           <Center key={music.id}>
@@ -19,7 +20,6 @@ const MusicGrid = () => {
           
         ))}
       </SimpleGrid>
-    </>
   );
 };
 export default MusicGrid;

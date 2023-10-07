@@ -1,11 +1,11 @@
 import {Badge} from "@chakra-ui/react"
 interface Props{
-    lan : string
+    score : string
 }
 
-const MusicCardScore=({lan} : Props)=>{
+const MusicCardScore=({score} : Props)=>{
     return(
-     <Badge borderRadius={2} colorScheme="purple" >{lan}</Badge>
+     <Badge borderRadius={2} colorScheme="purple" >{score}</Badge>
     )
 }
 export default MusicCardScore;
