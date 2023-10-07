@@ -4,8 +4,9 @@ import { SiApplemusic } from "react-icons/si";
 
 interface Props {
   onSelectedGenre: (genreName: string) => void;
+  selectedGenre:string
 }
-const GenraList = ({ onSelectedGenre }: Props) => {
+const GenraList = ({ onSelectedGenre,selectedGenre }: Props) => {
   const { data, error } = useGenres();
   if (error) return null;
   return (
@@ -17,6 +18,7 @@ const GenraList = ({ onSelectedGenre }: Props) => {
             <Button
               onClick={() => onSelectedGenre(genra.name)}
               px={1}
+              colorScheme={selectedGenre === genra.name?"purple":""}
               variant="link"
             >
               {genra.name}

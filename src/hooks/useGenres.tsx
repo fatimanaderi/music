@@ -5,11 +5,13 @@ export interface Genre {
   name: string;
 }
 
-const useGenres = () =>
-  useData<Genre>({
+const useGenres = () =>{
+  const {data , error} = useData<Genre>({
     endpoint: "/genre/all",
     listname:"genres",
     params:{limit: 17}
   });
+  return{data , error}
+}
 
 export default useGenres;
