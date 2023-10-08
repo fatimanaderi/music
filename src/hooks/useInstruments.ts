@@ -9,7 +9,7 @@ const useInstruments = () =>{
   const {data , error} = useData<Instrument>({
     endpoint: "/instrument",
     listname:"instruments",
-    params:{limit: 17 , query:"instrument"}
+    params:{limit: 17,query:"instrument" },
   });
   return{data , error}
 }

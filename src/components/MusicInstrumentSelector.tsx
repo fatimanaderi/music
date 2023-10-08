@@ -9,17 +9,29 @@ import {
 import { FiChevronDown } from "react-icons/fi";
 import useInstruments from "../hooks/useInstruments";
 
-const MusicInstrumentSelector = () => {
-    const { data , error} =useInstruments();
-    if (error) return null
+interface Props {
+  onSelectedInstrument: (instrument: string) => void;
+  selectedInstrument:string
+}
+
+const MusicInstrumentSelector = ({ onSelectedInstrument,selectedInstrument }: Props) => {
+  const { data, error } = useInstruments();
+  if (error) return null;
   return (
     <HStack ml={5}>
       <Menu>
         <MenuButton as={Button} rightIcon={<FiChevronDown />}>
-          Instrument
+          {selectedInstrument ||"Instrument"}
         </MenuButton>
         <MenuList>
-            {data.map(instrument =><MenuItem key={instrument.id}>{instrument.name}</MenuItem> )}
+          {data.map((instrument) => (
+            <MenuItem
+              onClick={() => onSelectedInstrument(instrument.name)}
+              key={instrument.id}
+            >
+              {instrument.name}
+            </MenuItem>
+          ))}
         </MenuList>
       </Menu>
     </HStack>

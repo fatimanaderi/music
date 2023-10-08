@@ -9,7 +9,7 @@ const useGenres = () =>{
   const {data , error} = useData<Genre>({
     endpoint: "/genre/all",
     listname:"genres",
-    params:{limit: 17}
+    params:{limit: 17,fmt:"json"}
   });
   return{data , error}
 }

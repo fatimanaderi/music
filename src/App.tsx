@@ -6,7 +6,8 @@ import { useState } from "react";
 import MusicInstrumentSelector from "./components/MusicInstrumentSelector";
 
 function App() {
-  const [selectedGenre , setSelectedGenre] = useState("")
+  const [selectedGenre, setSelectedGenre] = useState("");
+  const [selectedInstrument, setSelectedInstrument] = useState("");
   return (
     <>
       <Grid
@@ -17,13 +18,21 @@ function App() {
           <NavBar />
         </GridItem>
         <Show above="lg">
-          <GridItem area={"aside"} >
-            <GenraList selectedGenre={selectedGenre} onSelectedGenre={(genre)=>setSelectedGenre(genre)}/>
+          <GridItem area={"aside"}>
+            <GenraList
+              selectedGenre={selectedGenre}
+              onSelectedGenre={(genre) => setSelectedGenre(genre)}
+            />
           </GridItem>
         </Show>
-        <GridItem  area={"main"}>
-          <MusicInstrumentSelector/>
-          <MusicGrid selectedGenre={selectedGenre}/>
+        <GridItem area={"main"}>
+          <MusicInstrumentSelector
+          selectedInstrument ={selectedInstrument}
+            onSelectedInstrument={(instrument) =>
+              setSelectedInstrument(instrument)
+            }
+          />
+          <MusicGrid selectedGenre={selectedGenre} selectedInstrument={selectedInstrument} />
         </GridItem>
       </Grid>
     </>

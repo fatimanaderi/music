@@ -2,6 +2,7 @@ import axios from "axios";
 import useData from "./useData";
 import { useEffect, useState } from "react";
 import loadingImage from "../assets/logo2.png";
+import queryUrl from "../services/queryUrl";
 
 export interface Music {
   id: string;
@@ -17,18 +18,19 @@ interface ArtistCredit {
   name: string;
 }
 
-const useMusics = (selectedGenre: string) => {
+const useMusics = (selectedGenre: string,selectedInstrument: string) => {
   const [imageLoading, setImageLoading] = useState<boolean[]>(
     Array(8).fill(true)
   );
+  const queryUrlString =queryUrl({tag: selectedGenre , title:selectedInstrument})
   const { data, error, setData } = useData<Music>({
     endpoint: "/release",
     listname: "releases",
     params: {
       limit: 8,
-      query: (selectedGenre ? selectedGenre: "release"),
+      query: "release"+queryUrlString,
     },
-    deps:[selectedGenre]
+    deps: [selectedGenre, selectedInstrument],
   });
 
   const setUrlCover = (url: string, id: string, index: number) => {
@@ -59,6 +61,7 @@ const useMusics = (selectedGenre: string) => {
       )
       .catch(() => setUrlCover(loadingImage, id, index));
   };
+
   useEffect(() => {
     data.forEach((music, index) => getCoverImage(music.id, index));
   }, [JSON.stringify(data)]);
