@@ -1,9 +1,10 @@
-import { Grid, GridItem, Show } from "@chakra-ui/react";
+import { Grid, GridItem, HStack, Show } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import MusicGrid from "./components/MusicGrid";
 import GenraList from "./components/GenraList";
 import { useState } from "react";
 import MusicInstrumentSelector from "./components/MusicInstrumentSelector";
+import SortSelector from "./components/SortSelector";
 
 function App() {
   const [selectedGenre, setSelectedGenre] = useState("");
@@ -26,12 +27,15 @@ function App() {
           </GridItem>
         </Show>
         <GridItem area={"main"}>
+          <HStack>
           <MusicInstrumentSelector
           selectedInstrument ={selectedInstrument}
             onSelectedInstrument={(instrument) =>
               setSelectedInstrument(instrument)
             }
           />
+          <SortSelector/>
+          </HStack>
           <MusicGrid selectedGenre={selectedGenre} selectedInstrument={selectedInstrument} />
         </GridItem>
       </Grid>
