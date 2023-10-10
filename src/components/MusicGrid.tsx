@@ -1,13 +1,13 @@
 import { Center, SimpleGrid, Text } from "@chakra-ui/react";
 import MusicCard from "./MusicCard";
 import useMusics from "../hooks/useMusics";
+import { MusicQuery } from "../App";
 interface Props{
-  selectedGenre:string ;
-  selectedInstrument:string
+  musicQuery: MusicQuery
 }
 
-const MusicGrid = ({selectedGenre , selectedInstrument}:Props) => {
-  const { data, error ,imageLoading } = useMusics(selectedGenre , selectedInstrument);
+const MusicGrid = ({musicQuery}:Props) => {
+  const { data, error ,imageLoading } = useMusics(musicQuery);
   if(error) return null;
   return (
       <SimpleGrid
@@ -15,7 +15,7 @@ const MusicGrid = ({selectedGenre , selectedInstrument}:Props) => {
         padding={5}
         spacing={4}
       >
-        {(data.length==0 && selectedInstrument!="") && <Text>There is nothing here!</Text>}
+        {(data.length==0 && Object.keys(musicQuery).length != 0) && <Text>There is nothing here!</Text>}
         {data.map((music,index) => (
           <Center key={music.id}>
             <MusicCard music={music} imageStatus={imageLoading[index]}/>

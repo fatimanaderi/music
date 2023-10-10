@@ -3,6 +3,7 @@ import useData from "./useData";
 import { useEffect, useState } from "react";
 import loadingImage from "../assets/logo2.png";
 import queryUrl from "../services/queryUrl";
+import { MusicQuery } from "../App";
 
 export interface Music {
   id: string;
@@ -18,19 +19,22 @@ interface ArtistCredit {
   name: string;
 }
 
-const useMusics = (selectedGenre: string,selectedInstrument: string) => {
+const useMusics = (musicQuery: MusicQuery) => {
   const [imageLoading, setImageLoading] = useState<boolean[]>(
     Array(8).fill(true)
   );
-  const queryUrlString =queryUrl({tag: selectedGenre , title:selectedInstrument})
+  let queryUrlString = "";
+  if (Object.keys(musicQuery).length != 0)
+  queryUrlString = queryUrl({...musicQuery as MusicQuery});
   const { data, error, setData } = useData<Music>({
     endpoint: "/release",
     listname: "releases",
     params: {
       limit: 8,
-      query: "release"+queryUrlString,
+      offset: 6,
+      query: queryUrlString?queryUrlString :"release",
     },
-    deps: [selectedGenre, selectedInstrument],
+    deps: [musicQuery?.tag, musicQuery?.instrument, musicQuery?.label, musicQuery?.area],
   });
 
   const setUrlCover = (url: string, id: string, index: number) => {

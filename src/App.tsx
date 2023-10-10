@@ -3,12 +3,40 @@ import NavBar from "./components/NavBar";
 import MusicGrid from "./components/MusicGrid";
 import GenraList from "./components/GenraList";
 import { useState } from "react";
-import MusicInstrumentSelector from "./components/MusicInstrumentSelector";
-import SortSelector from "./components/SortSelector";
+import AllSelector from "./components/AllSelector";
+
+export interface Query {
+  endpoint: string;
+  listname: string;
+  query: string;
+}
+export interface MusicQuery {
+  instrument: "";
+  tag: "";
+  label:"";
+  area:"";
+  [x:string] :""
+}
+const queries: Query[] = [
+  {
+    endpoint: "/instrument",
+    listname: "instruments",
+    query: "instrument",
+  },
+  {
+    endpoint: "/label",
+    listname: "labels",
+    query: "label",
+  },
+  {
+    endpoint: "/area",
+    listname: "areas",
+    query: "area",
+  },
+];
 
 function App() {
-  const [selectedGenre, setSelectedGenre] = useState("");
-  const [selectedInstrument, setSelectedInstrument] = useState("");
+  const [musicQuery, setMusicQuery] = useState<MusicQuery>({} as MusicQuery);
   return (
     <>
       <Grid
@@ -21,22 +49,25 @@ function App() {
         <Show above="lg">
           <GridItem area={"aside"}>
             <GenraList
-              selectedGenre={selectedGenre}
-              onSelectedGenre={(genre) => setSelectedGenre(genre)}
+              selectedGenre={musicQuery.tag}
+              onSelectedGenre={(tag) =>
+                setMusicQuery({ ...musicQuery, tag } as MusicQuery)
+              }
             />
           </GridItem>
         </Show>
         <GridItem area={"main"}>
           <HStack>
-          <MusicInstrumentSelector
-          selectedInstrument ={selectedInstrument}
-            onSelectedInstrument={(instrument) =>
-              setSelectedInstrument(instrument)
-            }
-          />
-          <SortSelector/>
+            {queries.map((query: Query) => (
+              <AllSelector
+                query={query}
+                key={query.query}
+                valueSelector={musicQuery[query.query]}
+                onChangedValue={(value) => setMusicQuery({...musicQuery ,[query.query]:value} as MusicQuery)}
+              />
+            ))}
           </HStack>
-          <MusicGrid selectedGenre={selectedGenre} selectedInstrument={selectedInstrument} />
+          <MusicGrid musicQuery={musicQuery} />
         </GridItem>
       </Grid>
     </>

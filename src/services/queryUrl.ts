@@ -1,12 +1,15 @@
-interface Query {
-  tag:string;
-  title:string;
- }
-const queryUrl = (q:Query) => {
+import { MusicQuery } from "../App";
+
+const queryUrl = (q:MusicQuery) => {
   let queryString = "";
+ 
   Object.entries(q).forEach(([key, value]) => {
     if(value != ""){
-      queryString += `${key}:${value}&`;
+      if(key == "instrument"){
+        queryString += `title:${value}&`;
+      }else{
+        queryString += `${key}:${value}&`;
+      }
     }
   });
   

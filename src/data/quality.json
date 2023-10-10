@@ -1,0 +1,19 @@
+[
+    {"name": "Album"},
+    {"name":"Single"},
+    {"name":"EP"},
+    {"name":"Broadcast"},
+    {"name":"Other"},
+    {"name":"Compilation"},
+    {"name":"Soundtrack"},
+    {"name":"Spokenword"},
+    {"name":"Interview"},
+    {"name":"Audiobook"},
+    {"name":"Audio drama"},
+    {"name":"Live"},
+    {"name":"Remix"},
+    {"name":"DJ-mix"},
+    {"name":"Mixtape/Street"},
+    {"name":"Demo"},
+    {"name":"Field recording"}
+]
