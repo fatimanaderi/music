@@ -10,7 +10,7 @@ const GenraList = ({ onSelectedGenre,selectedGenre }: Props) => {
   const { data, error } = useGenres();
   if (error) return null;
   return (
-    <List mx={1}>
+    <List mx={4} >
       {data.map((genra) => (
         <ListItem key={genra.id}>
           <HStack my={3}>
