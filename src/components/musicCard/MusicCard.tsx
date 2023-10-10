@@ -1,5 +1,5 @@
 import { Card, Image, Skeleton } from "@chakra-ui/react";
-import { Music } from "../hooks/useMusics";
+import { Music } from "../../hooks/useMusics";
 import MusicCardBody from "./MusicCardBody";
 interface Props {
   music: Music;

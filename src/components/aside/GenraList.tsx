@@ -1,6 +1,6 @@
 import { Button, HStack, Icon, List, ListItem } from "@chakra-ui/react";
-import useGenres from "../hooks/useGenres";
 import { SiApplemusic } from "react-icons/si";
+import useGenres from "../../hooks/useGenres";
 
 interface Props {
   onSelectedGenre: (genreName: string) => void;

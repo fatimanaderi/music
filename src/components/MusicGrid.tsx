@@ -1,5 +1,5 @@
 import { Center, SimpleGrid, Text } from "@chakra-ui/react";
-import MusicCard from "./MusicCard";
+import MusicCard from "./musicCard/MusicCard";
 import useMusics from "../hooks/useMusics";
 import { MusicQuery } from "../App";
 interface Props{

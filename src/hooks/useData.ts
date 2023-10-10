@@ -5,7 +5,7 @@ interface Props {
   endpoint: string;
   listname: string;
   params: {};
-  deps?: string[];
+  deps?: {};
 }
 interface R<S> {
   [x: string]: S[];
@@ -32,7 +32,7 @@ const useData = <T>({
         setError(err.message);
         setLoading(false);
       });
-  }, [...deps]);
+  }, [JSON.stringify(deps)]);
   return { data, error, isLoading, setData };
 };
 

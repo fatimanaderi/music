@@ -24,8 +24,9 @@ const useMusics = (musicQuery: MusicQuery) => {
     Array(8).fill(true)
   );
   let queryUrlString = "";
-  if (Object.keys(musicQuery).length != 0)
-  queryUrlString = queryUrl({...musicQuery as MusicQuery});
+  if (Object.keys(musicQuery).length != 0){
+    queryUrlString = queryUrl({...musicQuery as MusicQuery});
+  }
   const { data, error, setData } = useData<Music>({
     endpoint: "/release",
     listname: "releases",
@@ -34,7 +35,7 @@ const useMusics = (musicQuery: MusicQuery) => {
       offset: 6,
       query: queryUrlString?queryUrlString :"release",
     },
-    deps: [musicQuery?.tag, musicQuery?.instrument, musicQuery?.label, musicQuery?.area],
+    deps: [musicQuery],
   });
 
   const setUrlCover = (url: string, id: string, index: number) => {

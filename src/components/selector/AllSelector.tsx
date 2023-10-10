@@ -1,14 +1,17 @@
 import {
   Button,
+  Flex,
   HStack,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
+  Wrap,
+  WrapItem,
 } from "@chakra-ui/react";
 import { FiChevronDown } from "react-icons/fi";
-import useAllSelector from "../hooks/useAllSelector";
-import { Query } from "../App";
+import useAllSelector from "../../hooks/useAllSelector";
+import { Query } from "../../App";
 interface Props{
   valueSelector:string;
   onChangedValue:(value:string)=>void;
@@ -18,7 +21,8 @@ const AllSelector = ({valueSelector,onChangedValue,query}:Props) => {
   const { data, error } = useAllSelector(query);
   if (error) return null;
   return (
-    <HStack ml={5}>
+    <Wrap ml={5}>
+      <WrapItem>
       <Menu>
         <MenuButton as={Button} rightIcon={<FiChevronDown />}>
         {valueSelector || query.query}
@@ -34,7 +38,8 @@ const AllSelector = ({valueSelector,onChangedValue,query}:Props) => {
           ))}
         </MenuList>
       </Menu>
-    </HStack>
+      </WrapItem>
+    </Wrap>
   );
 };
 export default AllSelector;
