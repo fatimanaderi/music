@@ -14,7 +14,7 @@ function App() {
         templateColumns={{ base: "1fr", lg: "230px" }}
       >
         <GridItem area={"nav"}>
-          <NavBar />
+          <NavBar onSearch={(title)=>setMusicQuery({ ...musicQuery, title } as MusicQuery)}/>
         </GridItem>
         <Show above="lg">
           <GridItem area={"aside"}>

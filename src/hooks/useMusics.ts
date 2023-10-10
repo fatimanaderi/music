@@ -3,7 +3,7 @@ import useData from "./useData";
 import { useEffect, useState } from "react";
 import loadingImage from "../assets/logo2.png";
 import queryUrl from "../services/queryUrl";
-import { MusicQuery } from "../App";
+import { MusicQuery } from "../components/main/Main";
 
 export interface Music {
   id: string;
@@ -24,16 +24,15 @@ const useMusics = (musicQuery: MusicQuery) => {
     Array(8).fill(true)
   );
   let queryUrlString = "";
-  if (Object.keys(musicQuery).length != 0){
-    queryUrlString = queryUrl({...musicQuery as MusicQuery});
+  if (Object.keys(musicQuery).length != 0) {
+    queryUrlString = queryUrl({ ...(musicQuery as MusicQuery) });
   }
   const { data, error, setData } = useData<Music>({
     endpoint: "/release",
     listname: "releases",
     params: {
       limit: 8,
-      offset: 6,
-      query: queryUrlString?queryUrlString :"release",
+      query: queryUrlString ? queryUrlString : "release",
     },
     deps: [musicQuery],
   });

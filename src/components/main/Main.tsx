@@ -1,4 +1,4 @@
-import { Flex, Wrap } from "@chakra-ui/react";
+import { Wrap } from "@chakra-ui/react";
 import AllSelector from "../selector/AllSelector";
 import AllSelectorData from "../selector/AllSelectorData";
 import country from "./../../data/country.json";
@@ -17,6 +17,7 @@ export interface MusicQuery {
   country: "";
   quality: "";
   year: "";
+  title:"";
   [x: string]: "";
 }
 const queries: Query[] = [
