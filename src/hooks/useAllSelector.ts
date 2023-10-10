@@ -1,4 +1,4 @@
-import { Query } from "../App";
+import { Query } from "../components/main/Main";
 import useData from "./useData";
 
 export interface Response {
