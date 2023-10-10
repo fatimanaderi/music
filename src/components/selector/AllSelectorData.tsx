@@ -1,16 +1,5 @@
-import {
-  Button,
-  Flex,
-  HStack,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Wrap,
-  WrapItem,
-} from "@chakra-ui/react";
-import { FiChevronDown } from "react-icons/fi";
-import { QueryData } from "../../App";
+import { QueryData } from "../main/Main";
+import Selector from "./Selector";
 
 interface Props {
   valueSelector: string;
@@ -19,22 +8,12 @@ interface Props {
 }
 const AllSelectorData = ({ valueSelector, onChangedValue, query }: Props) => {
   return (
-    <Wrap ml={5}>
-      <WrapItem>
-      <Menu>
-        <MenuButton as={Button} rightIcon={<FiChevronDown />}>
-          {valueSelector || query.name}
-        </MenuButton>
-        <MenuList>
-          {query.data.map((val) => (
-            <MenuItem onClick={() => onChangedValue(val.name)} key={val.name}>
-              {val.name}
-            </MenuItem>
-          ))}
-        </MenuList>
-      </Menu>
-      </WrapItem>
-    </Wrap>
+    <Selector
+      name={query.name}
+      data={query.data}
+      valueSelector={valueSelector}
+      onChangedValue={onChangedValue}
+    />
   );
 };
 export default AllSelectorData;
