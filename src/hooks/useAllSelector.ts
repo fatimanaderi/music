@@ -9,6 +9,7 @@ interface Response<T> {
   [x: string]: T[];
 }
 const useAllSelector = ({ name, initialData, query }: QueryItem) => {
+  const staleTime = 24*60*60*1000
   const { data, error, isLoading } = useQuery({
     queryKey: [name],
     queryFn: () =>
@@ -17,8 +18,8 @@ const useAllSelector = ({ name, initialData, query }: QueryItem) => {
           params: { limit: 17, offset: 5, query: name },
         })
         .then((res) => res.data[query.listname]),
-    initialData: initialData,
-    staleTime:Infinity
+    initialData: initialData.length !=0 ? initialData : undefined,
+    staleTime:initialData.length !=0 ? staleTime : Infinity
   });
   return { data, error, isLoading };
 };
