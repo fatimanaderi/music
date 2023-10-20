@@ -38,4 +38,4 @@ npm run build
 ```
 
 ### SEE PROJECT IN VERCEL
-https://music-47n0sfuwa-fatimaanaderi.vercel.app/
+https://music-blond-rho.vercel.app/
