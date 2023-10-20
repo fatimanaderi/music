@@ -9,24 +9,18 @@ interface Response<T> {
   [x: string]: T[];
 }
 const useAllSelector = ({ name, initialData, query }: QueryItem) => {
-  let mainData: Data[] | undefined = initialData;
-  let loading = false;
-  let mainError;
-  if (initialData.length == 0) {
-    const { data, error, isLoading } = useQuery({
-      queryKey: [name],
-      queryFn: () =>
-        apiClient
-          .get<Response<Data>>(query.endpoint, {
-            params: { limit: 17, offset:5, query:name  },
-          })
-          .then((res) => res.data[query.listname]),
-    });
-    mainError = error;
-    mainData = data;
-    loading = isLoading;
-  }
-  return { data: mainData, error: mainError, isLoading: loading };
+  const { data, error, isLoading } = useQuery({
+    queryKey: [name],
+    queryFn: () =>
+      apiClient
+        .get<Response<Data>>(query.endpoint, {
+          params: { limit: 17, offset: 5, query: name },
+        })
+        .then((res) => res.data[query.listname]),
+    initialData: initialData,
+    staleTime:Infinity
+  });
+  return { data, error, isLoading };
 };
 
 export default useAllSelector;
