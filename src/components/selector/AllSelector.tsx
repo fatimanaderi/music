@@ -1,17 +1,17 @@
+import { QueryItem } from "../../data/query";
 import useAllSelector from "../../hooks/useAllSelector";
-import { Query } from "../main/Main";
 import Selector from "./Selector";
 interface Props {
   valueSelector: string;
   onChangedValue: (value: string) => void;
-  query: Query;
+  queryItem: QueryItem;
 }
-const AllSelector = ({ valueSelector, onChangedValue, query }: Props) => {
-  const { data, error } = useAllSelector(query);
+const AllSelector = ({ valueSelector, onChangedValue, queryItem }: Props) => {
+  const { data, error } = useAllSelector(queryItem);
   if (error) return null;
   return (
     <Selector
-      name={query.query}
+      name={queryItem.name}
       data={data}
       valueSelector={valueSelector}
       onChangedValue={onChangedValue}

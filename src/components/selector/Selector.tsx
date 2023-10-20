@@ -4,7 +4,7 @@ interface Props{
   valueSelector:string;
   onChangedValue:(value:string)=>void;
   name:string;
-  data:Data[];
+  data:Data[] | undefined;
 }
 interface Data{
   name:string
@@ -18,7 +18,7 @@ const Selector = ({valueSelector,data,onChangedValue,name}:Props) => {
               {valueSelector || name}
             </MenuButton>
             <MenuList>
-              {data.map((val,index) => (
+              {data?.map((val,index) => (
                 <MenuItem onClick={() => onChangedValue(val.name)} key={index}>
                   {val.name}
                 </MenuItem>

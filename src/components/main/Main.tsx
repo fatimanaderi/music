@@ -1,14 +1,7 @@
 import { Wrap } from "@chakra-ui/react";
 import AllSelector from "../selector/AllSelector";
-import AllSelectorData from "../selector/AllSelectorData";
-import country from "./../../data/country.json";
-import quality from "./../../data/quality.json";
-import years from "./../../data/year";
-export interface Query {
-  endpoint: string;
-  listname: string;
-  query: string;
-}
+import { QueryItem, queries } from "../../data/query";
+
 export interface MusicQuery {
   instrument: "";
   tag: "";
@@ -17,71 +10,23 @@ export interface MusicQuery {
   country: "";
   quality: "";
   year: "";
-  title:"";
+  title: "";
   [x: string]: "";
 }
-const queries: Query[] = [
-  {
-    endpoint: "/instrument",
-    listname: "instruments",
-    query: "instrument",
-  },
-  {
-    endpoint: "/label",
-    listname: "labels",
-    query: "label",
-  },
-  {
-    endpoint: "/area",
-    listname: "areas",
-    query: "area",
-  },
-];
-const queriesData: QueryData[] = [
-  {
-    name: "country",
-    data: country.slice(0, 10),
-  },
-  {
-    name: "quality",
-    data: quality,
-  },
-  {
-    name: "year",
-    data: years,
-  },
-];
-export interface QueryData {
-  name: string;
-  data: Data[];
+interface Props {
+  musicQuery: MusicQuery;
+  setQuery: (value: MusicQuery) => void;
 }
-export interface Data {
-  name: string;
-}
-interface Props{
-    musicQuery:MusicQuery;
-    setQuery:(value:MusicQuery)=>void;
-}
-const Main = ({musicQuery,setQuery}:Props) => {
+const Main = ({ musicQuery, setQuery }: Props) => {
   return (
     <Wrap ml={6}>
-      {queries.map((query: Query) => (
+      {queries.map((queryItem: QueryItem) => (
         <AllSelector
-          query={query}
-          key={query.query}
-          valueSelector={musicQuery[query.query]}
+        queryItem={queryItem}
+          key={queryItem.name}
+          valueSelector={musicQuery[queryItem.name]}
           onChangedValue={(value) =>
-            setQuery({ ...musicQuery, [query.query]: value } as MusicQuery)
-          }
-        />
-      ))}
-      {queriesData.map((item: QueryData) => (
-        <AllSelectorData
-          query={item}
-          key={item.name}
-          valueSelector={musicQuery[item.name]}
-          onChangedValue={(value) =>
-            setQuery({ ...musicQuery, [item.name]: value } as MusicQuery)
+            setQuery({ ...musicQuery, [queryItem.name]: value } as MusicQuery)
           }
         />
       ))}

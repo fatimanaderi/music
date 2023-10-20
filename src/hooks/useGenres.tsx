@@ -1,17 +1,23 @@
-import useData from "./useData";
+import { useQuery } from "@tanstack/react-query";
+import apiClient from "../services/api-client";
 
 export interface Genre {
   id: string;
   name: string;
 }
-
-const useGenres = () =>{
-  const {data , error} = useData<Genre>({
-    endpoint: "/genre/all",
-    listname:"genres",
-    params:{limit: 17,fmt:"json"}
-  });
-  return{data , error}
+interface Response<T> {
+  [x: string]: T[];
 }
+
+const useGenres = () => {
+  const { data, error, isLoading } = useQuery({
+    queryKey: ["genres"],
+    queryFn: () =>
+      apiClient
+        .get<Response<Genre>>("/genre/all", { params: { limit: 17, fmt: "json" } })
+        .then((res) => res.data["genres"]),
+  });
+  return {data, error, isLoading}
+};
 
 export default useGenres;
