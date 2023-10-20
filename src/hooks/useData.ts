@@ -1,14 +1,11 @@
 import { useEffect, useState } from "react";
-import apiClient from "../services/api-client";
+import { Response, axiosInstance } from "../services/api-client";
 
 interface Props {
   endpoint: string;
   listname: string;
   params: {};
   deps?: {};
-}
-interface R<S> {
-  [x: string]: S[];
 }
 
 const useData = <T>({
@@ -22,8 +19,8 @@ const useData = <T>({
   const [isLoading, setLoading] = useState(false);
   useEffect(() => {
     setLoading(true);
-    apiClient
-      .get<R<T>>(`${endpoint}`, { params:{...params}})
+    axiosInstance
+      .get<Response<T>>(`${endpoint}`, { params:{...params}})
       .then((res) => {
         setData(res.data[listname]);
         setLoading(false);

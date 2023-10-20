@@ -10,13 +10,10 @@ export interface Music {
   title: string;
   thumbnailsSmall: string;
   score: string;
-  "artist-credit": ArtistCredit[];
+  "artist-credit": {name: string}[];
   "release-group": {
     "primary-type": string;
   };
-}
-interface ArtistCredit {
-  name: string;
 }
 
 const useMusics = (musicQuery: MusicQuery) => {
