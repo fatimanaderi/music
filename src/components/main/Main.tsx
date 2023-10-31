@@ -1,33 +1,19 @@
 import { Wrap } from "@chakra-ui/react";
 import AllSelector from "../selector/AllSelector";
 import { QueryItem, queries } from "../../data/query";
+import useMusicQueryStore from "../../store";
 
-export interface MusicQuery {
-  instrument: "";
-  tag: "";
-  label: "";
-  area: "";
-  country: "";
-  quality: "";
-  year: "";
-  title: "";
-  [x: string]: "";
-}
-interface Props {
-  musicQuery: MusicQuery;
-  setQuery: (value: MusicQuery) => void;
-}
-const Main = ({ musicQuery, setQuery }: Props) => {
+const Main = () => {
+  const setQuerySelector = useMusicQueryStore((s) => s.setQuerySelector);
+  const musicQuery = useMusicQueryStore(s=>s.musicQuery);
   return (
     <Wrap ml={6}>
       {queries.map((queryItem: QueryItem) => (
         <AllSelector
-        queryItem={queryItem}
+          queryItem={queryItem}
           key={queryItem.name}
           valueSelector={musicQuery[queryItem.name]}
-          onChangedValue={(value) =>
-            setQuery({ ...musicQuery, [queryItem.name]: value } as MusicQuery)
-          }
+          onChangedValue={(value) => setQuerySelector(value, queryItem.name)}
         />
       ))}
     </Wrap>

@@ -1,6 +1,15 @@
+import {
+  Button,
+  Menu,
+  MenuItem,
+  MenuButton,
+  MenuList,
+  Wrap,
+  WrapItem,
+} from "@chakra-ui/react";
 import { QueryItem } from "../../data/query";
 import useAllSelector from "../../hooks/useAllSelector";
-import Selector from "./Selector";
+import { FiChevronDown } from "react-icons/fi";
 interface Props {
   valueSelector: string;
   onChangedValue: (value: string) => void;
@@ -10,12 +19,22 @@ const AllSelector = ({ valueSelector, onChangedValue, queryItem }: Props) => {
   const { data, error } = useAllSelector(queryItem);
   if (error) return null;
   return (
-    <Selector
-      name={queryItem.name}
-      data={data}
-      valueSelector={valueSelector}
-      onChangedValue={onChangedValue}
-    />
+    <Wrap>
+      <WrapItem mx={2}>
+        <Menu>
+          <MenuButton as={Button} rightIcon={<FiChevronDown />}>
+            {valueSelector || queryItem.name}
+          </MenuButton>
+          <MenuList>
+            {data?.map((val, index) => (
+              <MenuItem onClick={() => onChangedValue(val.name)} key={index}>
+                {val.name}
+              </MenuItem>
+            ))}
+          </MenuList>
+        </Menu>
+      </WrapItem>
+    </Wrap>
   );
 };
 export default AllSelector;

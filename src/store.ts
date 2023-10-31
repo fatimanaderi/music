@@ -1,14 +1,6 @@
 import { create } from "zustand";
 
-interface MusicQuery {
-  instrument: string;
-  tag: string;
-  label: string;
-  area: string;
-  country: string;
-  quality: string;
-  year: string;
-  title: string;
+export interface MusicQuery {
   [x: string]: string;
 }
 
@@ -19,20 +11,12 @@ interface MusicQueryStore {
   setQuerySelector: (querySelector: string, queryName: string) => void;
 }
 
-create<MusicQueryStore>((set) => ({
-  musicQuery: {
-    instrument: "",
-    tag: "",
-    label: "",
-    area: "",
-    country: "",
-    quality: "",
-    year: "",
-    title: "",
-  },
+const useMusicQueryStore = create<MusicQueryStore>((set) => ({
+  musicQuery: {},
   setSearchText: (searchText) =>
-    set((store) => ({ ...store, title: searchText })),
-  setGenreName: (genreName) => set((store) => ({ ...store, tag: genreName })),
+    set(() => ({ musicQuery: { title: searchText } })),
+  setGenreName: (genreName) => set(() => ({ musicQuery: { tag: genreName } })),
   setQuerySelector: (querySelector, queryName) =>
-    set((store) => ({ ...store, [queryName]: querySelector })),
+    set(() => ({ musicQuery: { [queryName]: querySelector } })),
 }));
+export default useMusicQueryStore;

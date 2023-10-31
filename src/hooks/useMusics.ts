@@ -3,7 +3,7 @@ import useData from "./useData";
 import { useEffect, useState } from "react";
 import loadingImage from "../assets/logo2.png";
 import queryUrl from "../services/queryUrl";
-import { MusicQuery } from "../components/main/Main";
+import { MusicQuery } from "../store";
 
 export interface Music {
   id: string;
@@ -16,7 +16,7 @@ export interface Music {
   };
 }
 
-const useMusics = (musicQuery: MusicQuery) => {
+const useMusics = (musicQuery:MusicQuery) => {
   const [imageLoading, setImageLoading] = useState<boolean[]>(
     Array(8).fill(true)
   );
