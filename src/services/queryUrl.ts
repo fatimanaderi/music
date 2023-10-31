@@ -1,4 +1,4 @@
-import { MusicQuery } from "../components/Main";
+import { MusicQuery } from "../store";
 
 const queryUrl = (q:MusicQuery) => {
   let queryString = "";
