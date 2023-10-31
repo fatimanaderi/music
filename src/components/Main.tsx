@@ -1,7 +1,7 @@
 import { Wrap } from "@chakra-ui/react";
-import AllSelector from "../selector/AllSelector";
-import { QueryItem, queries } from "../../data/query";
-import useMusicQueryStore from "../../store";
+import AllSelector from "./AllSelector";
+import { QueryItem, queries } from "../data/query";
+import useMusicQueryStore from "../store";
 
 const Main = () => {
   const setQuerySelector = useMusicQueryStore((s) => s.setQuerySelector);

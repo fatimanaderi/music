@@ -1,8 +1,8 @@
 import { Grid, GridItem, Show } from "@chakra-ui/react";
 import NavBar from "./components/navbar/NavBar";
 import MusicGrid from "./components/MusicGrid";
-import GenraList from "./components/aside/GenraList";
-import Main from "./components/main/Main";
+import GenraList from "./components/GenraList";
+import Main from "./components/Main";
 
 function App() {
   return (

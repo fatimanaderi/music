@@ -1,7 +1,7 @@
 import { Button, HStack, Icon, List, ListItem } from "@chakra-ui/react";
 import { SiApplemusic } from "react-icons/si";
-import useGenres from "../../hooks/useGenres";
-import useMusicQueryStore from "../../store";
+import useGenres from "../hooks/useGenres";
+import useMusicQueryStore from "../store";
 
 const GenraList = () => {
   const { data, error } = useGenres();

@@ -7,8 +7,8 @@ import {
   Wrap,
   WrapItem,
 } from "@chakra-ui/react";
-import { QueryItem } from "../../data/query";
-import useAllSelector from "../../hooks/useAllSelector";
+import { QueryItem } from "../data/query";
+import useAllSelector from "../hooks/useAllSelector";
 import { FiChevronDown } from "react-icons/fi";
 interface Props {
   valueSelector: string;
