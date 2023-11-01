@@ -1,21 +1,21 @@
 import { Grid, GridItem, Show } from "@chakra-ui/react";
 import GenraList from "../components/GenraList";
-import Main from "../components/Main";
+import AllSelector from "../components/AllSelector";
 import MusicGrid from "../components/MusicGrid";
 
 const HomePage = () => {
   return (
     <Grid
       templateAreas={{ base: `"main"`, lg: `"aside main"` }}
-      templateColumns={{ base: "1fr", lg: "230px" }}
+      templateColumns={{ base: "1fr", lg: "initial" }}
     >
       <Show above="lg">
-        <GridItem area={"aside"}>
+        <GridItem area={"aside"} className="scrollArea">
           <GenraList />
         </GridItem>
       </Show>
       <GridItem area={"main"}>
-        <Main />
+        <AllSelector />
         <MusicGrid />
       </GridItem>
     </Grid>

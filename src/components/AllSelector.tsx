@@ -1,40 +1,27 @@
-import {
-  Button,
-  Menu,
-  MenuItem,
-  MenuButton,
-  MenuList,
-  Wrap,
-  WrapItem,
-} from "@chakra-ui/react";
-import { QueryItem } from "../data/query";
-import useAllSelector from "../hooks/useAllSelector";
-import { FiChevronDown } from "react-icons/fi";
-interface Props {
-  valueSelector: string;
-  onChangedValue: (value: string) => void;
-  queryItem: QueryItem;
-}
-const AllSelector = ({ valueSelector, onChangedValue, queryItem }: Props) => {
-  const { data, error } = useAllSelector(queryItem);
-  if (error) return null;
+import { Center, SimpleGrid } from "@chakra-ui/react";
+import CustomSelector from "./CustomSelector";
+import { QueryItem, queries } from "../data/query";
+import useMusicQueryStore from "../store";
+
+const AllSelector = () => {
+  const setQuerySelector = useMusicQueryStore((s) => s.setQuerySelector);
+  const musicQuery = useMusicQueryStore((s) => s.musicQuery);
   return (
-    <Wrap>
-      <WrapItem mx={2}>
-        <Menu>
-          <MenuButton as={Button} rightIcon={<FiChevronDown />}>
-            {valueSelector || queryItem.name}
-          </MenuButton>
-          <MenuList>
-            {data?.map((val, index) => (
-              <MenuItem onClick={() => onChangedValue(val.name)} key={index}>
-                {val.name}
-              </MenuItem>
-            ))}
-          </MenuList>
-        </Menu>
-      </WrapItem>
-    </Wrap>
+    <SimpleGrid
+      margin={3}
+      spacing={3}
+      columns={{ base: 2, sm: 3, md: 4, lg: 6 }}
+    >
+      {queries.map((queryItem: QueryItem) => (
+        <Center key={queryItem.name}>
+          <CustomSelector
+            queryItem={queryItem}
+            valueSelector={musicQuery[queryItem.name]}
+            onChangedValue={(value) => setQuerySelector(value, queryItem.name)}
+          />
+        </Center>
+      ))}
+    </SimpleGrid>
   );
 };
 export default AllSelector;

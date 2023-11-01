@@ -36,7 +36,7 @@ export const queries: QueryItem[] = [
     },
   },
   {
-    initialData: country.slice(0, 10),
+    initialData: country,
     name: "country",
     query: {
       endpoint: "",
