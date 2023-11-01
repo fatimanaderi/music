@@ -9,7 +9,7 @@ const apiClient = new APIClient<Genre>("/genre/all")
 const useGenres = () => {
   const { data, error, isLoading } = useQuery({
     queryKey: ["genres"],
-    queryFn: () => apiClient.getAll({params: { limit: 17, fmt: "json" }} ,"genres")
+    queryFn: () => apiClient.getAll({params: { limit: 20, fmt: "json" }} ,"genres")
   });
   return {data, error, isLoading}
 };
