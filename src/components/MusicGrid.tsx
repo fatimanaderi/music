@@ -7,7 +7,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import useMusics from "../hooks/useMusics";
-import useMusicQueryStore from "../store";
+import useMusicQueryStore from "../store/musicStore";
 import MusicCardBody from "./musicCard/MusicCardBody";
 
 const MusicGrid = () => {

@@ -1,7 +1,7 @@
 import { Input, InputGroup, InputLeftElement } from "@chakra-ui/react";
 import { useRef } from "react";
 import { BsSearch } from "react-icons/bs";
-import useMusicQueryStore from "../../store";
+import useMusicQueryStore from "../../store/musicStore";
 
 const SearchInput = () => {
   const ref = useRef<HTMLInputElement>(null);

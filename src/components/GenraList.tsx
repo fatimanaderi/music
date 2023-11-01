@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { SiApplemusic } from "react-icons/si";
 import useGenres from "../hooks/useGenres";
-import useMusicQueryStore from "../store";
+import useMusicQueryStore from "../store/musicStore";
 import React from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 

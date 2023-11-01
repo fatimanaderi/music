@@ -3,7 +3,7 @@ import useData from "./useData";
 import { useEffect, useState } from "react";
 import loadingImage from "../assets/logo2.png";
 import queryUrl from "../services/queryUrl";
-import { MusicQuery } from "../store";
+import { MusicQuery } from "../store/musicStore";
 
 export interface Music {
   id: string;
