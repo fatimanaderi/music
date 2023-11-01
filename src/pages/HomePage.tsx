@@ -10,7 +10,7 @@ const HomePage = () => {
       templateColumns={{ base: "1fr", lg: "initial" }}
     >
       <Show above="lg">
-        <GridItem area={"aside"} className="scrollArea">
+        <GridItem area={"aside"}>
           <GenraList />
         </GridItem>
       </Show>

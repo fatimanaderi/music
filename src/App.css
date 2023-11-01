@@ -2,7 +2,7 @@ form{
     width: 100% !important;
 }
 .scrollArea{
-    height: initial;
+    height: 100dvh;
     overflow-y: scroll;
     padding-bottom: 20px;
 }
