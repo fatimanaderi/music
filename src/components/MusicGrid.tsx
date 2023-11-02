@@ -31,6 +31,10 @@ const MusicGrid = () => {
             borderRadius={10}
             overflow="hidden"
             mx={2}
+            _hover={{
+              transform :'scale(1.05)',
+              transition:'transform .15s ease-in'
+            }}
           >
             {imageLoading[index] ? (
               <Skeleton height={"250px"} />
@@ -41,6 +45,7 @@ const MusicGrid = () => {
               name={music["artist-credit"][0].name}
               type={music["release-group"]["primary-type"]}
               score={music.score}
+              id={music.id}
             />
           </Card>
         </Center>
