@@ -1,72 +1,37 @@
-import axios from "axios";
-import useData from "./useData";
-import { useEffect, useState } from "react";
-import loadingImage from "../assets/logo2.png";
 import queryUrl from "../services/queryUrl";
-import { MusicQuery } from "../store/musicStore";
+import useMusicQueryStore, { MusicQuery } from "../store/musicStore";
+import { useQuery } from "@tanstack/react-query";
+import APIClient from "../services/api-client";
 
 export interface Music {
   id: string;
   title: string;
   thumbnailsSmall: string;
   score: string;
-  "artist-credit": {name: string}[];
+  "artist-credit": { name: string }[];
   "release-group": {
     "primary-type": string;
   };
 }
 
-const useMusics = (musicQuery:MusicQuery) => {
-  const [imageLoading, setImageLoading] = useState<boolean[]>(
-    Array(8).fill(true)
-  );
-  let queryUrlString = "";
-  if (Object.keys(musicQuery).length != 0) {
-    queryUrlString = queryUrl({ ...(musicQuery as MusicQuery) });
-  }
-  const { data, error, setData } = useData<Music>({
-    endpoint: "/release",
-    listname: "releases",
+const useMusics = () => {
+  const apiClient = new APIClient<Music>("release");
+  const musicQuery = useMusicQueryStore((s) => s.musicQuery);
+  let queryUrlStr = "";
+  if (Object.keys(musicQuery).length != 0)
+    queryUrlStr = queryUrl({ ...(musicQuery as MusicQuery) });
+  const conf = {
     params: {
       limit: 8,
-      query: queryUrlString ? queryUrlString : "release",
+      query: queryUrlStr ? queryUrlStr : "release",
     },
-    deps: [musicQuery],
+  };
+  const { data, error,isLoading } = useQuery({
+    queryKey: ["musics", musicQuery],
+    queryFn: () => apiClient.getAll(conf, "releases"),
+    staleTime: 24 * 60 * 60 * 1000,
   });
 
-  const setUrlCover = (url: string, id: string, index: number) => {
-    setData((data) =>
-      data.map((preMusic) =>
-        preMusic.id === id
-          ? {
-              ...preMusic,
-              thumbnailsSmall: url,
-            }
-          : preMusic
-      )
-    );
-    setImageLoading((imageLoading) => {
-      const newImageLoading = [...imageLoading];
-      newImageLoading[index] = false;
-      return newImageLoading;
-    });
-  };
-
-  const getCoverImage = (id: string, index: number) => {
-    axios
-      .get("https://coverartarchive.org/release/" + id, {
-        headers: { "Content-Type": "application/json" },
-      })
-      .then((res) =>
-        setUrlCover(res.data.images[0].thumbnails["small"], id, index)
-      )
-      .catch(() => setUrlCover(loadingImage, id, index));
-  };
-
-  useEffect(() => {
-    data.forEach((music, index) => getCoverImage(music.id, index));
-  }, [JSON.stringify(data)]);
-
-  return { data, error, imageLoading };
+  return { data, error ,isLoading};
 };
 export default useMusics;

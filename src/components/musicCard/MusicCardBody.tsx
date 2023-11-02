@@ -1,6 +1,5 @@
-import { CardBody, HStack, Heading } from "@chakra-ui/react";
+import { Badge, CardBody, HStack, Heading } from "@chakra-ui/react";
 import MusicCardIcon from "./MusicCardIcon";
-import MusicCardScore from "./MusicCardScore";
 import { AiFillStar } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
@@ -18,7 +17,7 @@ const MusicCardBody = ({ name, type, score,id }: Props) => {
         <HStack my={1}>
           <MusicCardIcon nameIcon={AiFillStar} valueName={type} />
         </HStack>
-        <MusicCardScore score={score} />
+        <Badge borderRadius={2} colorScheme="purple" >{score}</Badge>
       </HStack>
     </CardBody>
   );
