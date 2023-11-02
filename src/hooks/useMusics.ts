@@ -54,7 +54,7 @@ const useMusics = (musicQuery:MusicQuery) => {
 
   const getCoverImage = (id: string, index: number) => {
     axios
-      .get("http://coverartarchive.org/release/" + id, {
+      .get("https://coverartarchive.org/release/" + id, {
         headers: { "Content-Type": "application/json" },
       })
       .then((res) =>
