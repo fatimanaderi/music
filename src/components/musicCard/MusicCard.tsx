@@ -22,7 +22,7 @@ const MusicCard = ({ music }: Props) => {
           transition: "transform .15s ease-in",
         }}
       >
-        {isLoading && <Skeleton height={"250px"} />}
+        {isLoading && <Skeleton height={"220px"} />}
         {isError && <Image src={loadingImage} height={"inherit"} minHeight={"200px"} />}
         {imgUrl && <Image src={imgUrl} height={"inherit"} minHeight={"200px"} />}
         <MusicCardBody
