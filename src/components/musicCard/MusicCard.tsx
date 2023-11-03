@@ -1,14 +1,12 @@
-import { Card, Center, Image, Skeleton } from "@chakra-ui/react";
+import { Card, Center } from "@chakra-ui/react";
 import MusicCardBody from "./MusicCardBody";
 import { Music } from "../../hooks/useMusics";
-import useMusicImg from "../../hooks/useMusicImg";
-import loadingImage from "../../assets/logo2.png";
+import MusicImg from "../MusicImg";
 
 interface Props {
   music: Music;
 }
 const MusicCard = ({ music }: Props) => {
-  const { data: imgUrl, isError, isLoading } = useMusicImg(music.id);
   return (
     <Center>
       <Card
@@ -22,9 +20,7 @@ const MusicCard = ({ music }: Props) => {
           transition: "transform .15s ease-in",
         }}
       >
-        {isLoading && <Skeleton height={"220px"} />}
-        {isError && <Image src={loadingImage} height={"inherit"} minHeight={"200px"} />}
-        {imgUrl && <Image src={imgUrl} height={"inherit"} minHeight={"200px"} />}
+        <MusicImg size="small" id={music.id} minHeight={"200px"}/>
         <MusicCardBody
           name={music["artist-credit"][0].name}
           type={music["release-group"]["primary-type"]}
