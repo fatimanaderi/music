@@ -7,12 +7,18 @@ export interface Genre {
 }
 const apiClient = new APIClient<Genre>("/genre/all");
 const useGenres = () =>
-  useInfiniteQuery<Genre[] ,Error>({
+  useInfiniteQuery<Genre[], Error>({
     queryKey: ["genres"],
-    queryFn: ({ pageParam = 1 }) =>apiClient.getAll({ params: {limit:30,fmt: "json", offset: pageParam } },"genres"),
-    getNextPageParam: (lastPage, allPage) => lastPage.length > 0 ? allPage.length + 1 : undefined,
-    initialPageParam:[{id:1 , name:""}],
-    staleTime:24*60*60*1000
+    queryFn: ({ pageParam }) =>
+      apiClient.getAll(
+        { params: { limit: 25, fmt: "json", offset: pageParam } },
+        "genres"
+      ),
+
+    getNextPageParam: (lastPage, allPage) =>
+      lastPage.length > 0 ? allPage.length + 1 : undefined,
+    initialPageParam: 0,
+    staleTime: 24 * 60 * 60 * 1000,
   });
 
 export default useGenres;

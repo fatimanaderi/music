@@ -16,6 +16,7 @@ const useMusicQueryStore = create<MusicQueryStore>((set) => ({
   setSearchText: (searchText) =>
     set(() => ({ musicQuery: { title: searchText } })),
   setGenreName: (genreName) => set(() => ({ musicQuery: { tag: genreName } })),
-  setQuerySelector: (querySelector, queryName) => set(() => ({ musicQuery: { [queryName]: querySelector } })),
+  setQuerySelector: (querySelector, queryName) =>
+    set(() => ({ musicQuery: { [queryName]: querySelector } })),
 }));
 export default useMusicQueryStore;

@@ -7,7 +7,7 @@ const useAllSelector = ({ name, initialData, query }: QueryItem) => {
   const apiClient = new APIClient<{name:string}>(query.endpoint)
   const { data, error, isLoading } = useQuery({
     queryKey: [name],
-    queryFn: () =>apiClient.getAll({params:{ limit: 17, offset: 5, query: name }} ,query.listname) ,
+    queryFn: () =>apiClient.getAll({params:{[name] :"" ,limit:18 , offset:4}} ,query.listname) ,
     initialData: initialData.length !=0 ? initialData : undefined,
     staleTime:initialData.length !=0 ? staleTime : Infinity
   });

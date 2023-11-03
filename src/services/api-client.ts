@@ -4,6 +4,21 @@ export const axiosInstance = axios.create({
   headers: {
     "Content-Type": "text/plain",
   },
+  paramsSerializer: function paramsSerializer(params) {
+    return (
+      "query=" +
+      Object.entries(Object.assign({}, params))
+        .map(([key, value]) => {
+          if (value != "") {
+            if (key == "limit" || key == "offset" || key == "fmt")
+              return `${key}=${value}`;
+            return `${key}:${value}`;
+          }
+          return `${key}`;
+        })
+        .join("&")
+    );
+  },
 });
 export interface Response<T> {
   [x: string]: T[];

@@ -18,10 +18,9 @@ export interface Music {
 }
 
 const apiClient = new APIClient<Music>("release");
-
-const useMusicDetail = (slug: string) =>
+const useMusicDetail = (id: string) =>
   useQuery({
-    queryKey: ["music", slug],
-    queryFn: () => apiClient.get(slug),
+    queryKey: ["music", id],
+    queryFn: () => apiClient.getAll({ params: { reid: id } } , "releases").then((res=>res[0])),
   });
 export default useMusicDetail;
