@@ -17,8 +17,9 @@ const MusicImgDetails = ({id}:Props) => {
       mx="auto"
       my="3"
       backgroundColor={"transparent"}
+      shadow={"none"}
     >
-      <MusicImg id={id} size="small" minHeight={"300px"} borderRadius={10} />
+      <MusicImg id={id} size="small" minHeight={"300px"} borderRadius={10}  />
     </Card>
   );
 };

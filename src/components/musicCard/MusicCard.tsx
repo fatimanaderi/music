@@ -19,8 +19,10 @@ const MusicCard = ({ music }: Props) => {
           transform: "scale(1.05)",
           transition: "transform .15s ease-in",
         }}
+        borderWidth={"1px"}
+        borderColor={"gray.600"}
       >
-        <MusicImg size="small" id={music.id} minHeight={"200px"}/>
+        <MusicImg size="small" id={music.id} minHeight={"200px"} height="200px"/>
         <MusicCardBody
           name={music["artist-credit"][0].name}
           type={music["release-group"]["primary-type"]}

@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import APIClient from "../services/api-client";
 
-interface Music {
+export interface Music {
   title: string;
   country: string;
   date: string;
