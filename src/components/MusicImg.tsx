@@ -6,17 +6,18 @@ interface Props {
   id: string;
   size: string;
   minHeight:string;
+  borderRadius?:number;
 }
 
-const MusicImg = ({ id, size ,minHeight}: Props) => {
+const MusicImg = ({ id, size ,minHeight,borderRadius=0}: Props) => {
   const { data: imgUrl, isError, isLoading } = useMusicImg(id, size);
   return (
     <>
-      {isLoading && <Skeleton height={"inherit"} minHeight={minHeight} />}
+      {isLoading && <Skeleton height={"inherit"} borderRadius={borderRadius} minHeight={minHeight} />}
       {isError && (
-        <Image src={loadingImage} height={"inherit"} minHeight={minHeight} />
+        <Image src={loadingImage} height={"inherit"} borderRadius={borderRadius} />
       )}
-      {imgUrl && <Image src={imgUrl} height={"inherit"} minHeight={minHeight} />}
+      {imgUrl && <Image src={imgUrl} height={"inherit"} borderRadius={borderRadius} />}
     </>
   );
 };

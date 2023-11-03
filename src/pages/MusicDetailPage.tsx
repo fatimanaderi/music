@@ -1,37 +1,22 @@
 import { useParams } from "react-router-dom";
-import useMusicDetail from "../hooks/useMusicDetail";
-import MusicImg from "../components/MusicImg";
-import { Box, Card, Center, SimpleGrid } from "@chakra-ui/react";
+import {Grid, GridItem } from "@chakra-ui/react";
+import MusicImgDetails from "../components/musicDetails/MuiscImgDetails";
+import MusicDetails from "../components/musicDetails/MusicDetails";
 
 const MusicDetailPage = () => {
   const { id } = useParams();
-  const { data, error } = useMusicDetail(id!);
-  if (error) return null;
   return (
-    <Box>
-      <SimpleGrid columns={{ base: 1, sm: 2, lg: 3 }} padding={5} spacing={4}>
-        <Center>
-          <Card
-            width={"100%"}
-            height={"initial"}
-            borderRadius={10}
-            overflow="hidden"
-            mx={2}
-            _hover={{
-              transform: "scale(1.05)",
-              transition: "transform .15s ease-in",
-            }}
-          >
-            <MusicImg id={id!} size="small" minHeight={"initial"}/>
-            Details + {id}
-          </Card>
-        </Center>
-        <div>
-          Details + {id}
-          <div>{data?.title}</div>
-        </div>
-      </SimpleGrid>
-    </Box>
+    <Grid
+      templateRows={{ base: "repeat(2, 1fr)", md: "repeat(1, 1fr)" }}
+      templateColumns={"repeat(7, 1fr)"}
+    >
+      <GridItem colSpan={{ base: 7, md: 2}} width={"100%"}>
+        <MusicImgDetails id={id!} />
+      </GridItem>
+      <GridItem colSpan={{ base: 7, md: 5}}>
+        <MusicDetails id={id!}/>
+      </GridItem>
+    </Grid>
   );
 };
 export default MusicDetailPage;
